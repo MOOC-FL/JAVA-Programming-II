@@ -98,3 +98,15 @@ double durationInMilliseconds = 1.0 * (end - start) / 1000000;
 
 System.out.println("The book search took " + durationInMilliseconds + " milliseconds.");
 ```
+- It took about 0.4 milliseconds to search for two books out of ten million books with the hash map. The difference in performance in our example is over a thousandfold.
+
+- The difference in performance is due to the fact that when a book is searched for in a list, the worst-case scenario involves going through all the books in the list. In a hash map, it isn't necessary to check all of the books as the key determines the location of a given book in a hash map. The difference in performance depends on the number of books - for example, the performance differences are negligible for 10 books. However, for millions of books, the performance differences are clearly visible.
+- Does this mean that we'll only be using hash maps going forward? Of course not. Hash maps work well when we know exactly what we are looking for. If we wanted to identify books whose title contains a particular string, the hash map would be of little use.
+- The hash maps also have no internal order, and it is not possible to search the hash map based on the indexes. The items in a list are in the order they were added to the list.
+- Typically, hash maps and lists are used together. The hash map provides quick access to a specific key or keys, while the list is used, for instance, to maintain order.
+
+| Characteristic | ArrayList (Linear Search) | HashMap |
+|----------------|---------------------------|---------|
+| **Performance with large datasets** | Slow - O(n) time complexity, must potentially check all elements. With 10M books, search takes ~881 ms. | Fast - O(1) average case, direct access via hash. With 10M books, search takes ~0.25 ms. |
+| **Use cases & limitations** | Useful when: 1) Searching by content/substring (e.g., "books whose title contains a particular string")<br>2) Need to maintain insertion order<br>3) Require index-based access<br>4) Collection size is small (negligible difference for 10 items)<br>Items remain in the order they were added. | Useful when: 1) Exact key lookups are needed<br>2) Fast access is critical for large collections<br>3) Unique keys are available<br>Not useful for: substring searches, maintaining order, or index-based access. Hash maps have no internal order. |
+
