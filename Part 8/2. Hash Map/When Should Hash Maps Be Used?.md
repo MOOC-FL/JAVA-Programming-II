@@ -60,4 +60,41 @@ System.out.println();
 
 System.out.println(get(books, "Persuasion"));
 ```
- 
+> The program would now work in the same way as the program implemented with the hash map, right?
+- Functionally, yes. Let's, however, consider the performance of the program. Java's `System.nanoTime()`method Returns the time of the computer in nanoseconds. We'll add functionality to the program considered above to calculate how long it took to retrieve the books.
+```java
+ArrayList<Book> books = new ArrayList<>();
+
+// adding ten million books to the list
+
+long start = System.nanoTime();
+System.out.println(get(books, "Sense and Sensibility"));
+
+System.out.println();
+
+System.out.println(get(books, "Persuasion"));
+long end = System.nanoTime();
+double durationInMilliseconds = 1.0 * (end - start) / 1000000;
+
+System.out.println("The book search took " + durationInMilliseconds + " milliseconds.");
+```
+
+> With ten million books, it takes almost a second to find two books. Of course, the way in which the list is ordered has an effect. If the book being searched was first on the list, the program would be faster. On the other hand, if the book were not on the list, the program would have to go through all of the books in the list before determining that such book does not exist.
+
+> Let's consider the same program using a hash map.
+```java
+HashMap<String, Book> directory = new HashMap<>();
+
+// adding ten million books to the list
+
+long start = System.nanoTime();
+System.out.println(directory.get("Sense and Sensibility"));
+
+System.out.println();
+
+System.out.println(directory.get("Persuasion"));
+long end = System.nanoTime();
+double durationInMilliseconds = 1.0 * (end - start) / 1000000;
+
+System.out.println("The book search took " + durationInMilliseconds + " milliseconds.");
+```
