@@ -114,3 +114,7 @@ System.out.println();
 
 System.out.println(library.getBook("SENSE"));
 ```
+- In the above example, we adhered to the **DRY (Don't Repeat Yourself)** principle according to which code duplication should be avoided.
+- `Sanitizing a string`, ie, `changing it to lowercase`, and `trimming`
+- ie, removing empty characters from the beginning and end, would have been repeated many times in our library class without the `sanitizedString` method.
+  > Repetitive code is often not noticed until it has already been written, which means that it almost always makes its way into the code. There's nothing wrong with that - the important thing is that the code is cleaned up so that places that require tidying up are noticed.
