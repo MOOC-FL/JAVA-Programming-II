@@ -33,3 +33,31 @@ for (Book book: books) {
 
 System.out.println(match);
 ```
+- For the program above, you could create a separate class method `get` that is provided a list and the name of the book to be fetched as parameters. The method returns a book found by the given name if one exists. Otherwise, the method returns a `null` reference.
+```java
+public static Book get(ArrayList<Book> books, String name) {
+
+    for (Book book: books) {
+        if (book.getName().equals(name)) {
+            return book;
+        }
+    }
+
+    return null;
+}
+```
+> Now the program is a bit more clear.
+```java
+ArrayList<Book> books = new ArrayList<>();
+Book senseAndSensibility = new Book("Sense and Sensibility", 1811, "...");
+Book prideAndPrejudice = new Book("Pride and Prejudice", 1813, "....");
+books.add(senseAndSensibility);
+books.add(prideAndPrejudice);
+
+System.out.println(get(books, "Sense and Sensibility"));
+
+System.out.println();
+
+System.out.println(get(books, "Persuasion"));
+```
+ 
