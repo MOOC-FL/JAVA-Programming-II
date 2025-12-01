@@ -17,3 +17,5 @@ public ArrayList<Book> getBookByPart(String titlePart) {
     return books;
 }
 ```
+> As with the previous example, the speed advantage that comes with the hash map is lost.
+
