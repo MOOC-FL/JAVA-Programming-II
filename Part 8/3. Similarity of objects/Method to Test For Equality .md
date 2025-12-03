@@ -126,6 +126,17 @@ public class Book {
 }
 
 ```
+> Now the book comparison returns true if the instance variables of the books are the same.
+```java
+Book bookObject = new Book("Book Object", 2000, "...");
+Book anotherBookObject = new Book("Book Object", 2000, "...");
+
+if (bookObject.equals(anotherBookObject)) {
+    System.out.println("The books are the same");
+} else {
+    System.out.println("The books aren't the same");
+}
+```
 
 
 
