@@ -137,6 +137,26 @@ if (bookObject.equals(anotherBookObject)) {
     System.out.println("The books aren't the same");
 }
 ```
+#### ArrayList 
+- The ArrayList also uses the `equals`method in its internal implementation. If we don't define the `equals`method in our objects, the `contains`method of the ArrayList does not work properly. If you try out the code below with two Book classes, one with the `equals`method defined and another without it, you'll see the difference.
+```java
+ArrayList<Book> books = new ArrayList<>();
+Book bookObject = new Book("Book Object", 2000, "...");
+books.add(bookObject);
+
+if (books.contains(bookObject)) {
+    System.out.println("Book Object was found.");
+}
+
+bookObject = new Book("Book Object", 2000, "...");
+
+if (!books.contains(bookObject)) {
+    System.out.println("Book Object was not found.");
+}
+```
+> This Reliance on default methods such as equalsis actually the reason why Java demands that variables added to ArrayList and HashMap are of reference type. Each reference type variable comes with default methods, such as equals, which means that you don't need to change the internal implementation of the ArrayList class when adding variables of different types. Primitive variables do not have such default methods.
+
+
 
 
 
