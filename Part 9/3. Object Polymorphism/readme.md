@@ -99,4 +99,18 @@ public class Printer {
     }
 }
 ```
+- The `printCharacters` method can be passed any object that implements the `CharSequence` interface. These include `String` as well as `StringBuilder`, which is often more functional for building `strings` than `String`. The printCharacters method prints each character of a given `object` on its own line.
+```java
+Printer printer = new Printer();
 
+String string = "works";
+
+printer.printCharacters(string);
+```
+```text
+w
+o
+r
+k
+s
+```
