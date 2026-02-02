@@ -58,5 +58,18 @@ double average = inputs.stream()
 - [ ] Calculating the average is possible from a stream that has the `mapToInt` method called on it.
 - [ ]  A stream of integers has an `average` method that returns an OptionalDouble-type object.
 - [ ]  The object has `getAsDouble()` method that returns the average of the list values as a `double` type variable.
+Based on your notes, here is the information organized into a structured table. I've clarified the "Method/Purpose" column and separated the core "Assumption/Requirement" from additional context.
 
+
+| Method / Purpose | Key Assumption / Requirement | Additional Context & Common Usage |
+| :--- | :--- | :--- |
+| **Stream Formation**<br>`stream()` | Called on an object that implements the `Collection` interface (e.g., `ArrayList`, `HashSet`). | This is the entry point for the Stream API. You typically call this on a collection and then chain subsequent operations. |
+| **Mapping to Integer Stream**<br>`mapToInt(value -> ...)` | Transforms a stream of objects into an `IntStream` (a stream of primitive integers). | Used to perform specialized integer operations (like `sum()`, `average()`). For `String` to `int`, use `mapToInt(Integer::parseInt)` or `mapToInt(Integer::valueOf)`. |
+| **Filtering Values**<br>`filter(value -> ...)` | The lambda expression (`->`) must return a `boolean` value. | Elements are passed through only if the condition evaluates to `true`. If `false`, the element is discarded from the downstream. |
+| **Calculating Average**<br>`average()` | Must be called on a stream of primitive numbers, typically an `IntStream`, `LongStream`, or `DoubleStream`. | Returns an `OptionalDouble` (to handle empty streams safely). Use `getAsDouble()` to get the value, but check `isPresent()` first or use `orElse()`. |
+| **Counting Elements**<br>`count()` | Can be called on any type of stream (`Stream<T>`, `IntStream`, etc.). | Returns the number of elements in the stream as a `long`. This is a **terminal operation** that consumes the stream. |
+
+1.  **Source:** Get a `Stream` from a `Collection` via `.stream()`.
+2.  **Intermediate Operations:** Transform (`mapToInt`) or filter (`filter`) the stream. These can be chained and are lazy.
+3.  **Terminal Operation:** Produce a result via `average()`, `count()`, `sum()`, `collect()`, etc. This ends the stream processing.
 
