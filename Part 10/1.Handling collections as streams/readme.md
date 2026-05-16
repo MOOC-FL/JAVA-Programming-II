@@ -5,6 +5,42 @@
 
 - Let's begin to understand the usage of streams through a concrete example. Consider the following problem:
 - Write a program that reads input from a user and prints statistics about those inputs. When the user enters the string "end", the reading is stopped. Other inputs are numbers in string format. When you stop reading inputs, the program prints the number of positive integers divisible by three, and the average of all values.
+```java
+package Collections;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // write your test code here
+        Scanner scanner = new Scanner(System.in);
+        List<String> inputs = new ArrayList<>();
+
+        while (true) {
+            String row = scanner.nextLine();
+            if (row.equals("end")) {
+                break;
+            }
+            inputs.add(row);
+        }
+        long numbersDivisableByThree = inputs.stream()
+                .mapToInt(s -> Integer.valueOf(s))
+                .filter(number -> number % 3 == 0)
+                .count();
+
+        double averageOfNumbersDivisableByThree = inputs.stream()
+                .mapToInt(s -> Integer.valueOf(s))
+                .filter(number -> number % 3 == 0)
+                .average().getAsDouble();
+
+        System.out.println("Numbers divisible by three: " + numbersDivisableByThree);
+        System.out.println("Average: " + averageOfNumbersDivisableByThree);
+
+    }
+}
+```
 
 
