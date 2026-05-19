@@ -28,3 +28,22 @@ ArrayList<Integer> values = list.stream()
     .map(value -> value * 2)
     .collect(Collectors.toCollection(ArrayList::new));
 ```
+- In the same way, we can form a combined row-separated string from a list of strings.
+```java
+ArrayList<String> words = new ArrayList<>();
+words.add("First");
+words.add("Second");
+words.add("Third");
+words.add("Fourth");
+
+String combined = words.stream()
+    .reduce("", (previousString, word) -> previousString + word + "\n");
+System.out.println(combined);
+```
+```text
+Sample output
+First
+Second
+Third
+Fourth
+```
