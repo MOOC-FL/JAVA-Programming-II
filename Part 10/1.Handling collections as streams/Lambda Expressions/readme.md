@@ -39,6 +39,35 @@ public class Screeners {
  // is the same as
 *stream*.filter(Screeners::greaterThanFive).*furtherAction*
   ```
+- Functions that handle stream elements ​​cannot change values ​​of variables outside of the function. This has to do with how static methods behave - during a method call, there is no access to any variables outside of the method. With functions, the values ​​of variables outside the function can be read, assuming that those values of those variables do not change in the program.
+- The program below demonstrates the situation in which a function attempts to make use of a variable outside the function. It doesn't work.
+```java
+// initializing a scanner and a list to which values are read
+Scanner scanner = new Scanner(System.in);
+List<String> inputs = new ArrayList<>()
+
+// reading inputs
+while (true) {
+    String row = scanner.nextLine();
+    if (row.equals("end")) {
+        break;
+    }
+
+    inputs.add(row);
+}
+
+int numberOfMappedValues = 0;
+
+// determining the number of values divisible by three
+long numbersDivisibleByThree = inputs.stream()
+    .mapToInt(s -> {
+        // variables declared outside of an anonymous function cannot be used, so this won't work
+        numberOfMappedValues++;
+        return Integer.valueOf(s);
+    }).filter(value -> value % 3 == 0)
+    .count();
+```
+
 
 
 
