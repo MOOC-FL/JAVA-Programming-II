@@ -20,4 +20,27 @@ if (number.matches("01[0-9]{7}")) {
 }
 ```
 Let's go through the most common characters used in regular expressions.
+Here's a summary of all the quantifiers and grouping constructs covered:
 
+| Construct | Syntax | Meaning | Example Pattern | Matches |
+|---|---|---|---|---|
+| Alternation | `a\|b\|c` | Exactly one of the alternatives | `00\|111\|0000` | `"00"`, `"111"`, `"0000"` |
+| Grouping | `(...)` | Groups part of the expression | `0000(0\|1)` | `"00000"`, `"00001"` |
+| Zero or more | `*` | 0, 1, 2, ... repetitions | `trolo(lo)*` | `"trolo"`, `"trololo"`, `"trolololo"` |
+| One or more | `+` | 1, 2, 3, ... repetitions | `tro(lo)+` | `"trolo"`, `"trololo"`, ... |
+| Zero or one | `?` | Optional — 0 or 1 time | `(delete )?` | `""` or `"delete "` |
+| Exactly n | `{a}` | Exactly `a` repetitions | `(10){2}` | `"1010"` |
+| Between n and m | `{a,b}` | Between `a` and `b` repetitions | `1{2,4}` | `"11"`, `"111"`, `"1111"` |
+| At least n | `{a,}` | `a` or more repetitions | `1{2,}` | `"11"`, `"111"`, `"11111"`, ... |
+
+**Key rule:** `String.matches()` in Java requires the pattern to match the **entire string**, not just a substring — unlike `Matcher.find()` which searches for a match anywhere inside the string.
+
+**Combining constructs** — example `5{3}(1|0)*5{3}`:
+
+| Part | Meaning |
+|---|---|
+| `5{3}` | Exactly three `5`s at the start |
+| `(1\|0)*` | Any number of `1`s and `0`s in the middle |
+| `5{3}` | Exactly three `5`s at the end |
+
+Matches: `"555555"`, `"5551 05 55"` → ✗, `"555101555"` → ✓
