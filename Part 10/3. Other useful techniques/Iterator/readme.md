@@ -1,4 +1,7 @@
 #### Iterator
+
+<img src="https://github.com/MOOC-FL/Media/blob/main/Java%20Programming%202/iterator_hand_cards_summary.svg"> </img>
+
 - Let's look at the following `Hand` class that represents the set of cards that a player is holding:
 ```java
 public class Hand {
@@ -87,18 +90,3 @@ public class Hand {
     }
 }
 ```
-<img src="https://github.com/MOOC-FL/Media/blob/main/Java%20Programming%202/iterator_hand_cards_summary.svg"> </img>
-Here's a structured breakdown of the content:
-
----
-
-## Core ConceptHere's a quick breakdown of the three key ideas from the content:
-
-**1. Basic printing with an iterator** — `cards.iterator()` hands you a "finger" that starts at the first element. `hasNext()` checks if there's a next card; `next()` returns it and advances the finger. This is equivalent to a for-each loop but gives you explicit control.
-
-**2. The `forEach` + `remove` trap** — When you call `cards.remove(card)` inside a `stream().forEach(...)`, Java detects that the list was structurally modified mid-traversal and throws `ConcurrentModificationException`. The `forEach` stream assumes the list is frozen while it runs.
-
-**3. Safe removal with `iterator.remove()`** — The iterator's own `remove()` method is designed for exactly this: it deletes the element that was last returned by `next()`, without confusing the traversal. This is the canonical way to conditionally remove elements while iterating.
-
-The rule of thumb: **read-only traversal → for-each is fine; need to remove → use an iterator**.
-
