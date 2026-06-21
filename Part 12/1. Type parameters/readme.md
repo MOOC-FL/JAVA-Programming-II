@@ -78,5 +78,81 @@ public class Pair<T, K> {
     }
 }
 ```
-
-
+- A significant portion of the Java data structures use type parameters, which enables them to handle different types of variables. `ArrayList`, for instance, receives a single `type parameter`, while `HashMap` receives two.
+```java
+List<String> strings = new ArrayList<>();
+Map<String, String> keyValuePairs = new HashMap<>();
+```
+> From here on out when you see the type `ArrayList<String>`, you know that its **internal implementation** uses a `generic` type parameter. The same principle holds true for the interface Comparable, for example.
+- Creating generic interfaces is very similar to creating generic classes.
+> 
+```java
+public interface List<T> {
+    void add(T value);
+    T get(int index);
+    T remove(int index);
+}
+```
+- [ ] There are two ways for a class to implement a generic interface.
+- [ ] One is to decide the type parameter in the definition of the class
+- [ ] and the other is to define the implementing class with a type parameter as well.
+> Below, the class `MovieList` defines the type parameter when it implements List. The MovieList is meant only for handling movies.
+```java
+public class MovieList implements List<Movie> {
+    // object variables
+    @Override
+    public void add(Movie value) {
+        // implementation
+    }
+    @Override
+    public Movie get(int index) {
+        // implementation
+    }
+    @Override
+    public Movie remove(int index) {
+        // implementation
+    }
+}
+```
+> The alternative is to use a type parameter in the class defintion, in which case the parameter is passed along to the interface. Now this concrete implementation of the interface remains generic.
+```java
+public class GeneralList<T> implements List<T> {
+    // object variables
+    @Override
+    public void add(T value) {
+        // implementation
+    }
+    @Override
+    public T get(int index) {
+        // implementation
+    }
+    @Override
+    public T remove(int index) {
+        // implementation
+    }
+}
+```
+> If you wanted, you could also use the existing ArrayList class to implement the GeneralList. The implementation would look roughly like this.
+```java
+import java.util.ArrayList;
+public class GeneralList<T> implements List<T> {
+    ArrayList<T> values;
+    public GeneralList() {
+        this.values = new ArrayList<>();
+    }
+    @Override
+    public void add(T value) {
+        this.values.add(value);
+    }
+    @Override
+    public T get(int index) {
+        retun this.values.get(index);
+    }
+    @Override
+    public T remove(int index) {
+        T value = this.values.get(index);
+        this.values.remove(index);
+        return value;
+    }
+}
+```
