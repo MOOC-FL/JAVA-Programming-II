@@ -156,3 +156,14 @@ public class GeneralList<T> implements List<T> {
     }
 }
 ```
+| | **Way 1 — Fixed Type** | **Way 2 — Pass-Through Type** |
+|---|---|---|
+| **Declaration** | `class MovieList implements List<Movie>` | `class MyList<T> implements List<T>` |
+| **Type decided** | At class definition | At instantiation |
+| **Type parameter on class** | ❌ | ✅ `<T>` |
+| **Reusable for other types** | ❌ | ✅ |
+| **Instantiation** | `new MovieList()` | `new MyList<Movie>()` |
+| **Add method signature** | `add(Movie movie)` | `add(T element)` |
+| **Get method signature** | `Movie get(int index)` | `T get(int index)` |
+| **Use case** | Domain-specific (Movies only) | General-purpose (any type) |
+| **Java stdlib example** | `String implements Comparable<String>` | `ArrayList<E> implements List<E>` |
