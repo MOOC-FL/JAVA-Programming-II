@@ -21,4 +21,16 @@ myList.add("hello");
 myList.add("world");
 ```
 #### Adding values to a list part 2
-- 
+- There is a small problem with the `add` method. The problem occurs when the following code is run:
+```java
+List<String> myList = new List<>();
+for (int i = 0; i < 11; i++) {
+    myList.add("hello");
+}
+```
+```text
+Sample output
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 10
+    at dataStructures.List.add(List.java:14)
+    at dataStructures.Program.main(Program.java:8)
+```
