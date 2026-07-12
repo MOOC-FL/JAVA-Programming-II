@@ -1,6 +1,2 @@
+> `ArrayList` and `HashMap` are commonly used **data structures** in programming. We are now going to take a look at their actual implementation. First we'll remind ourselves of how to use an `array`, after which we're going to build a **data structure** called `List`, imitating `ArrayList`. Then we'll make use of the `List` to implement the **data structure HashTable**.
 #### A brief recap of arrays
-- An array is an object that contains a limited number of places for values.
-- The `length (or size)` of an array is the number of places in it;
->  **in other words, how many values can be stored in the array.**
-#### The size of an array is always predetermined: 
-> **it is chosen when the array is created, and cannot be changed later.**
