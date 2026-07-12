@@ -63,3 +63,5 @@ for (int i = 0; i < numbers.length; i++) {
 // Select the correct answer
 ```
 > **The Answer is : 4 2 4 1**
+- Arrays can be used in the exact same manner as other variables, so they can be object variables, method parameters, return values of methods, and so on.
+- A significant portion of generally used data structures use arrays in their internal implementation.
