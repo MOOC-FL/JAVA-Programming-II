@@ -66,4 +66,10 @@ public void add(Type value) {
 }
 ```
 Now we can add almost unlimited amount of elements to the List.
+> **On the effectiveness of this method**
+
+> The method described above copies every element from the old array to the new array. If we would have for example two million elements in an array, we must go through two million elements while copying them.
+> We will discuss the effectiveness of this method — and ways to make it more effective — in the courses Datastructures and Algorithms and Design and analysis of algorithms.
+
+
 
