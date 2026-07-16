@@ -70,7 +70,28 @@ public void start(Stage window) {
 ```
 - Now pressing the button results in the content of the left text field being copied to the text field on the right.
 - NB! The method implemented can use objects that were declared before the method definition, as long as the values of the objects being used are not reassigned using the equals operator, i.e., the references do not change.
+#### Eventhandler 
+- The eventhandler being used depends on what kind of user interface component we attach it to.
+-  If we want to listen to changes made to a text field character by character, then we would use the interface `ChangeListener`.
+-  In the example below we have attached an object implementing the ChangeListener interface to text field on the left.
+-  This object prints the changes in the text field to the console as well as sets the new value into the text field on the right.
+```java
+leftText.textProperty().addListener(new ChangeListener<String>() {
+    @Override
+    public void changed(ObservableValue<? extends String> change,
+            String oldValue, String newValue) {
 
-
+        System.out.println(oldValue + " -> " + newValue);
+        oikeaTeksti.setText(newValue);
+    }
+});
+```
+- In the previous example the changes being observed are in the text of the text field. Beacause text is in string format we have provided string as the type for the handler interface. As before, we can also express this code in a more compact form.
+```java
+leftText.textProperty().addListener((change, oldValue, newValue) -> {
+    System.out.println(oldValue + " -> " + newValue);
+    rightText.setText(newValue);
+});
+```
 
 
