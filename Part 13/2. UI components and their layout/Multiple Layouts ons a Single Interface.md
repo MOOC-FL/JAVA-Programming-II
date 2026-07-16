@@ -51,3 +51,36 @@ public class JavaFxSovellus extends Application {
 }
 ```
 <img src="https://github.com/MOOC-FL/Media/blob/main/Java%20Programming%202/gui-useampi.webp" alt=""></img>
+
+
+- **`BorderPane`** is the outer/base layout, giving you the five regions (top, bottom, left, right, center).
+- **`HBox buttons`** is placed in `setTop(...)` — so "First", "Second", "Third" buttons sit in a horizontal row across the top.
+- **`VBox texts`** is placed in `setLeft(...)` — so the three labels stack vertically down the left side.
+- **`TextArea`** goes in `setCenter(...)` — filling the remaining space in the middle.
+
+Each region of the `BorderPane` accepts exactly **one** node — that's why `HBox`/`VBox` are used as containers to group multiple components into a single node before handing them to `setTop`/`setLeft`/etc.
+
+#### The general principle
+
+Any layout node (`HBox`, `VBox`, `GridPane`, `FlowPane`, etc.) is itself a `Node`, so it can be added into another layout just like a `Button` or `Label` can. This is what makes nesting possible — you're not limited to one layout manager per window, you build a **tree of layouts**, each handling its own region.
+
+```
+BorderPane (outer)
+ ├── top    → HBox (buttons row)
+ ├── left   → VBox (labels column)
+ └── center → TextArea
+```
+
+#### A common extension: nesting even further
+
+You could go one level deeper — e.g., put a `GridPane` inside the `VBox`, or wrap the `HBox` buttons row inside another `VBox` alongside a title label:
+
+```java
+VBox topSection = new VBox(5);
+topSection.getChildren().add(new Label("Toolbar"));
+topSection.getChildren().add(buttons);  // the HBox from before
+
+layout.setTop(topSection);
+```
+
+
