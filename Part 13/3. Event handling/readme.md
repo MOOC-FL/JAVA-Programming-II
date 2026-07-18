@@ -93,5 +93,19 @@ leftText.textProperty().addListener((change, oldValue, newValue) -> {
     rightText.setText(newValue);
 });
 ```
+- The program can also do statistics. Calculating the values ​​for the text fields in the previous exercise is quite straightforward. Following the example below, the values ​​would be updated every time the user changes the content of the text field.
+```java
+leftText.textProperty().addListener((change, oldValue, newValue) -> {
+    int characters = newValue.length();
+    String[] parts = newValue.split(" ");
+    int words = parts.length;
+    String longest = Arrays.stream(parts)
+        .sorted((s1, s2) -> s2.length() - s1.length())
+        .findFirst()
+        .get();
+
+    // set values of text elements
+});
+```
 
 
