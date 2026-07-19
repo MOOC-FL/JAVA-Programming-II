@@ -180,3 +180,37 @@ Here's the `grow()` method skeleton broken down into a table:
 | Insert pair into `newValues` at the recalculated index | Actually performs the relocation |
 
 Want me to fill in the actual copying logic for step 3, using the helper methods style you've been using (`getListBasedOnKey`-style)?
+
+- Now you can call the copy method from the grow method
+```java
+private void grow() {
+    // create a new array
+    List<Pair<K, V>>[] newArray = new List[this.values.length * 2];
+
+    for (int i = 0; i < this.values.length; i++) {
+        // copy the values of the old array into the new one
+        copy(newArray, i);
+    }
+
+    // replace the old array with the new
+    this.values = newArray;
+}
+```
+> Finally, let's add the growing functionality to be a part of the add method. We want to grow the size of the `hash map` if the number of `key-value` pairs in it is greater than 75% of the size of the internal array.
+```java
+public void add(K key, V value) {
+    List<Pair<K, V>> valuesAtIndex = getListBasedOnKey(key);
+    int index = getIndexOfKey(valuesAtIndex, key);
+
+    if (index < 0) {
+        valuesAtIndex.add(new Pair<>(key, value));
+        this.firstFreeIndex++;
+    } else {
+        valuesAtIndex.value(index).setValue(value);
+    }
+
+    if (1.0 * this.firstFreeIndex / this.values.length > 0.75) {
+        grow();
+    }
+}
+```
