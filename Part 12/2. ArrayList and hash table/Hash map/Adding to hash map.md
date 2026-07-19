@@ -142,3 +142,41 @@ private void grow() {
     this.values = newValues;
 }
 ```
+Here's the `grow()` method skeleton broken down into a table:
+
+#### Overall Method Flow
+
+| Step | Code | Purpose |
+|---|---|---|
+| 1. Create bigger array | `List<Pair<K, V>>[] newValues = new List[this.values.length * 2];` | Allocates a new internal array with **double** the capacity of the old one |
+| 2. Loop through old array | `for (int i = 0; i < this.values.length; i++) { ... }` | Visits every index (bucket) of the *old* array, one by one |
+| 3. Copy values *(not yet implemented)* | `// copy the values of the old array into the new one` | Placeholder — this is where each key-value pair from the old bucket needs to be re-inserted into the new array |
+| 4. Replace old with new | `this.values = newValues;` | Swaps the internal reference — the hash map now points to the bigger array |
+
+#### Why each step matters
+
+| Step | Why it's needed |
+|---|---|
+| Doubling the size | Keeps the load factor (items ÷ array size) low, so buckets stay small and lookups stay fast — this is the whole point of growing |
+| Looping through the old array | The data doesn't move itself — every existing key-value pair must be manually relocated |
+| Copying (still missing) | Without this step, all previously stored values would simply be lost when `this.values = newValues;` runs |
+| Replacing the reference at the end | Only done *after* copying, so no data is lost mid-process |
+
+#### What's still missing — and why it's tricky
+
+| Concern | Explanation |
+|---|---|
+| **Can't just copy the list reference directly** | If you did `newValues[i] = this.values[i];`, each pair would land at the **same index** in the new array — but since the array size changed, the hash formula (`hashCode() % values.length`) now produces **different indices** for the new, larger array |
+| **Must recalculate the hash for every pair** | Each key-value pair needs its hash value **recomputed** using the new array's length, not just copied to the same slot |
+| **Best approach** | Reuse the existing `add(key, value)` logic (or equivalent) inside the loop — since `add()` already knows how to calculate the correct index and insert into a list — rather than duplicating that logic here |
+
+#### Preview: what the copying loop will likely need to do
+
+| Sub-step | Purpose |
+|---|---|
+| Check if `this.values[i]` is not null | Skip empty buckets — nothing to copy |
+| Loop through the list at `this.values[i]` | Each bucket may contain multiple key-value pairs (due to collisions) |
+| Recalculate hash using `newValues.length` | Ensures the pair lands in the *correct* bucket for the new, bigger array |
+| Insert pair into `newValues` at the recalculated index | Actually performs the relocation |
+
+Want me to fill in the actual copying logic for step 3, using the helper methods style you've been using (`getListBasedOnKey`-style)?
