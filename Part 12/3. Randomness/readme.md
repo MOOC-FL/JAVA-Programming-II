@@ -31,6 +31,12 @@ Sample output
 7
 8
 ```
+- We can use the `nextInt` method to create **diverse randomness**. For example, we might need a program to give us a temperature between [-30,50]. We can do this by first creating **random** a number between 0 and 80 and then subtracting 30 from it.
+```java
+Random weatherMan = new Random();
+int temperature = weatherMan.nextInt(81) - 30;
+System.out.println(temperature);
+```
 
 
 
